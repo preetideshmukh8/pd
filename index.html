@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name - Portfolio & Blog</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f4f4f9;
+      color: #333;
+      padding: 20px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    header h1 {
+      margin-bottom: 5px;
+    }
+    header p {
+      font-style: italic;
+      color: #555;
+    }
+    section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      border-bottom: 2px solid #4a90e2;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+    #about-me p {
+      line-height: 1.6;
+    }
+    #blog-list article {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+    #blog-list article:last-child {
+      border-bottom: none;
+    }
+    #blog-list h3 {
+      margin: 0 0 5px 0;
+      color: #4a90e2;
+    }
+    #blog-list time {
+      font-size: 0.9em;
+      color: #999;
+    }
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    form input[type="text"], form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+    form button {
+      margin-top: 15px;
+      background: #4a90e2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    form button:hover {
+      background: #357ABD;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Preeti Deshmukh</h1>
+  <p>Technical Writer | Blogger | Content Creator</p>
+</header>
+
+<section id="about-me">
+  <h2>About Me</h2>
+  <p>Hello! I'm Preeti, a passionate technical writer and blogger. I love exploring the latest in technology and sharing insights with my readers. Welcome to my personal website where I share my stories, ideas, and news from the tech world.</p>
+</section>
+
+<section id="blog">
+  <h2>My Blogs</h2>
+  <div id="blog-list">
+    <p>No blog posts yet. Add your first blog below!</p>
+  </div>
+
+  <form id="blog-form">
+    <label for="blog-title">Blog Title</label>
+    <input type="text" id="blog-title" name="blog-title" required />
+
+    <label for="blog-content">Blog Content</label>
+    <textarea id="blog-content" name="blog-content" rows="6" required></textarea>
+
+    <button type="submit">Publish Blog</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Preeti Deshmukh. All rights reserved.
+</footer>
+
+<script>
+  const blogForm = document.getElementById('blog-form');
+  const blogList = document.getElementById('blog-list');
+
+  // Load blogs from localStorage if any
+  let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+
+  function renderBlogs() {
+    if (blogs.length === 0) {
+      blogList.innerHTML = '<p>No blog posts yet. Add your first blog below!</p>';
+      return;
+    }
+
+    blogList.innerHTML = '';
+    blogs.forEach(blog => {
+      const article = document.createElement('article');
+
+      const title = document.createElement('h3');
+      title.textContent = blog.title;
+
+      const date = document.createElement('time');
+      date.textContent = new Date(blog.date).toLocaleDateString();
+
+      const content = document.createElement('p');
+      content.textContent = blog.content;
+
+      article.appendChild(title);
+      article.appendChild(date);
+      article.appendChild(content);
+
+      blogList.appendChild(article);
+    });
+  }
+
+  blogForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const title = blogForm['blog-title'].value.trim();
+    const content = blogForm['blog-content'].value.trim();
+
+    if (!title || !content) {
+      alert('Please fill out both fields.');
+      return;
+    }
+
+    blogs.unshift({
+      title,
+      content,
+      date: new Date().toISOString()
+    });
+
+    localStorage.setItem('blogs', JSON.stringify(blogs));
+    renderBlogs();
+
+    blogForm.reset();
+  });
+
+  // Initial render
+  renderBlogs();
+</script>
+
+</body>
+</html>
