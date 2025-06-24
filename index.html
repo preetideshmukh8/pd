@@ -106,19 +106,41 @@
 
 <section id="blog">
   <h2>My Blogs</h2>
-  <div id="blog-list">
-    <p>No blog posts yet. Add your first blog below!</p>
-  </div>
-
-  <form id="blog-form">
-    <label for="blog-title">Blog Title</label>
-    <input type="text" id="blog-title" name="blog-title" required />
-
-    <label for="blog-content">Blog Content</label>
-    <textarea id="blog-content" name="blog-content" rows="6" required></textarea>
-
-    <button type="submit">Publish Blog</button>
-  </form>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 15px 0;
+    }
+    a {
+      text-decoration: none;
+      color: #3498db;
+      font-size: 18px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Blogs</h1>
+  <ul>
+    <li><a href="https://yourblog1.com" target="_blank" rel="noopener">Blog 1</a></li>
+    <li><a href="https://yourblog2.com" target="_blank" rel="noopener">Blog 2</a></li>
+    <li><a href="https://yourblog3.com" target="_blank" rel="noopener">Blog 3</a></li>
+  </ul>
 </section>
 
 <footer>
